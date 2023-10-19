@@ -58,6 +58,32 @@ public class UserRepositoryImpl implements UserRepository{
 		}
 	}
 
-
+	@Override
+	public int createFavSong(int idUser, int idSong) {
+		try {	
+			return jdbcTemplate.update(
+					"INSERT INTO favorite ( id_user, id_song ) VALUES(?, ?)",
+					new Object[] { idUser, idSong }
+					);
+		}catch(DataIntegrityViolationException e) {
+			//TODO exceptions
+			//throw new UserNotFoundConstraintException("Integrity fail when try to create a user");
+			return 0;
+		}
+	}
+	
+	@Override
+	public int deleteFavSong(int idUser, int idSong) {
+		try {	
+			return jdbcTemplate.update(
+					"DELETE FROM favorite WHERE id_user = ? AND id_song = ?",
+					new Object[] { idUser, idSong }
+					);
+		}catch(DataIntegrityViolationException e) {
+			//TODO exceptions
+			//throw new UserNotFoundConstraintException("Integrity fail when try to create a user");
+			return 0;
+		}
+	}
 
 }

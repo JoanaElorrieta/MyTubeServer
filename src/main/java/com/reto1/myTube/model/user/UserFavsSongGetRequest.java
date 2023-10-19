@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.reto1.myTube.model.song.SongDTO;
 
-public class UserDTO {
+public class UserFavsSongGetRequest {
 
 	private int id;
 	private String name;
@@ -13,15 +13,17 @@ public class UserDTO {
 	private String password;
 	private List<SongDTO> listSongFavs;
 	
-	public UserDTO() {}
-	
-	public UserDTO(int id, String name, String lastName, String email, String password) {
+	public UserFavsSongGetRequest() {}
+
+	public UserFavsSongGetRequest(int id, String name, String lastName, String email, String password,
+			List<SongDTO> listSongFavs) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.listSongFavs = listSongFavs;
 	}
 
 	public int getId() {
@@ -63,7 +65,7 @@ public class UserDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public List<SongDTO> getListSongFavs() {
 		return listSongFavs;
 	}
@@ -74,8 +76,8 @@ public class UserDTO {
 
 	@Override
 	public String toString() {
-		return "UserDTO [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email + ", password="
-				+ password + "]";
+		return "UserSongFavsGetRequest [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + ", listSongFavs=" + listSongFavs + "]";
 	}
-
+	
 }

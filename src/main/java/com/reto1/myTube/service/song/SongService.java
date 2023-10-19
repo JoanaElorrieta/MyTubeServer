@@ -11,5 +11,6 @@ public interface SongService {
 	int create(SongDTO songDto);
 	int update(SongDTO songDto);
 	int deleteById(int id);
+	List<SongDTO> findFavsSongsForUser(int id);
 	
 }

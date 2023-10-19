@@ -11,5 +11,6 @@ public interface SongRepository {
 	int create(SongDAO songDao);
 	int update(SongDAO songDao);
 	int deleteById(int id);
+	List<SongDAO> getFavsSongsForCertainUser(int id);
 	
 }

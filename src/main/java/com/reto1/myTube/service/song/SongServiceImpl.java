@@ -40,6 +40,11 @@ public class SongServiceImpl implements SongService{
 	public int deleteById(int id) {
 		return songRepository.deleteById(id);
 	}
+	
+	@Override
+	public List<SongDTO> findFavsSongsForUser(int id) {
+		return songDAOListToSongDTOList(songRepository.getFavsSongsForCertainUser(id));
+	}
 
 	//CONVERSIONES
 	

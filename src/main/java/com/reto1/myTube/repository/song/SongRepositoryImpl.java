@@ -98,4 +98,15 @@ public class SongRepositoryImpl implements SongRepository{
 		}
 	}
 
+	@Override
+	public List<SongDAO> getFavsSongsForCertainUser(int id) {
+		return jdbcTemplate.query(
+				"SELECT song.id, song.title, song.author, song.url FROM song\r\n"
+				+ "JOIN favorite on song.id = favorite.id_song\r\n"
+				+ "WHERE favorite.id_user = ?",
+				BeanPropertyRowMapper.newInstance(SongDAO.class),
+				id
+				);
+	}
+
 }
