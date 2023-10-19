@@ -77,7 +77,7 @@ public class SongRepositoryImpl implements SongRepository{
 					);
 		}catch (DataIntegrityViolationException e) {
 			//TODO exceptions
-			//throw new sONGNotFoundConstraintException("Integrity fail when try to update a SONG");
+			//throw new SongNotFoundConstraintException("Integrity fail when try to update a song");
 			return 0;
 		}
 	}
