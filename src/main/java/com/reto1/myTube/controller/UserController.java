@@ -22,9 +22,9 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping("/users/{email}")
-	public ResponseEntity<UserFavsSongGetRequest> getUserByEmail(@PathVariable("email") String email) {
-		UserFavsSongGetRequest userFavsSongGetRequest = userDTOtoUserFavsSongGetRequest(userService.findByEmail(email));
+	@GetMapping("/users/{email},{password}")
+	public ResponseEntity<UserFavsSongGetRequest> getUserByEmail(@PathVariable("email") String email, @PathVariable("password") String password) {
+		UserFavsSongGetRequest userFavsSongGetRequest = userDTOtoUserFavsSongGetRequest(userService.findByEmail(email, password));
 		return new ResponseEntity<>(userFavsSongGetRequest, HttpStatus.OK);
 	}
 

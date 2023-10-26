@@ -4,7 +4,7 @@ import com.reto1.myTube.model.user.UserDAO;
 
 public interface UserRepository {
 
-	UserDAO findByEmail(String email);
+	UserDAO findByEmail(String email, String password);
 	int create(UserDAO userDao);
 	int update(UserDAO userDao);
 	int createFavSong(int idUser, int idSong);

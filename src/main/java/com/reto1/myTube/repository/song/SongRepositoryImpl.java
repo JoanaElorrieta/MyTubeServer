@@ -19,12 +19,7 @@ public class SongRepositoryImpl implements SongRepository{
 	@Override
 	public List<SongDAO> findAll() {
 
-		try {
-
-			System.out.println(jdbcTemplate.query(
-					"SELECT * FROM song",
-					BeanPropertyRowMapper.newInstance(SongDAO.class)));
-
+		try {		
 			return jdbcTemplate.query(
 					"SELECT * FROM song",
 					BeanPropertyRowMapper.newInstance(SongDAO.class));

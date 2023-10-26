@@ -21,9 +21,9 @@ public class UserServiceImpl implements UserService{
 	SongService songService;
 	
 	@Override
-	public UserDTO findByEmail(String email) {
+	public UserDTO findByEmail(String email, String password) {
 		
-		UserDTO response = userDAOtoUserDTO(userRepository.findByEmail(email));
+		UserDTO response = userDAOtoUserDTO(userRepository.findByEmail(email, password));
 		
 		List<SongDTO> favsSongs = findFavsSongsForUser(response.getId());
 		

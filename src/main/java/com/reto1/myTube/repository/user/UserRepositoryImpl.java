@@ -15,12 +15,12 @@ public class UserRepositoryImpl implements UserRepository{
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public UserDAO findByEmail(String email) {
+	public UserDAO findByEmail(String email, String password) {
 		try {
 			return jdbcTemplate.queryForObject(
-					"SELECT * FROM user where email = ?",
+					"SELECT * FROM user where email = ? and password = ?",
 					BeanPropertyRowMapper.newInstance(UserDAO.class),
-					email
+					email, password
 					);}
 		catch (Exception e) {
 			//TODO exceptions
