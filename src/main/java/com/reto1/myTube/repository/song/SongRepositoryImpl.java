@@ -21,10 +21,6 @@ public class SongRepositoryImpl implements SongRepository{
 
 		try {
 
-			System.out.println(jdbcTemplate.query(
-					"SELECT * FROM song",
-					BeanPropertyRowMapper.newInstance(SongDAO.class)));
-
 			return jdbcTemplate.query(
 					"SELECT * FROM song",
 					BeanPropertyRowMapper.newInstance(SongDAO.class));
