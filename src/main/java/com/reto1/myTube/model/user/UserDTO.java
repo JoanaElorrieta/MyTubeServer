@@ -12,6 +12,7 @@ public class UserDTO {
 	private String email;
 	private String password;
 	private List<SongDTO> listSongFavs;
+	private List<Integer> views;
 	
 	public UserDTO() {}
 	
@@ -70,6 +71,14 @@ public class UserDTO {
 
 	public void setListSongFavs(List<SongDTO> listSongFavs) {
 		this.listSongFavs = listSongFavs;
+	}
+
+	public List<Integer> getViews() {
+		return views;
+	}
+
+	public void setViews(List<Integer> views) {
+		this.views = views;
 	}
 
 	@Override

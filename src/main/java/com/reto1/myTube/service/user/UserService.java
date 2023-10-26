@@ -13,5 +13,8 @@ public interface UserService {
 	List<SongDTO> findFavsSongsForUser(int id);
 	int createFavSong(int idUser, int idSong);
 	int deleteFavSong(int idUser, int idSong);
+	int updateNumberViews(int idUser, int idSong);
+	List<Integer> getNumberViews(int idUser);
+	
 	
 }
