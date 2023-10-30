@@ -22,9 +22,9 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping("/users/{email}")
-	public ResponseEntity<UserFavsSongGetRequest> getUserByEmail(@PathVariable("email") String email) {
-		UserFavsSongGetRequest userFavsSongGetRequest = userDTOtoUserFavsSongGetRequest(userService.findByEmail(email));
+	@GetMapping("/users/{email},{password}")
+	public ResponseEntity<UserFavsSongGetRequest> getUserByEmail(@PathVariable("email") String email, @PathVariable("password") String password) {
+		UserFavsSongGetRequest userFavsSongGetRequest = userDTOtoUserFavsSongGetRequest(userService.findByEmail(email, password));
 		return new ResponseEntity<>(userFavsSongGetRequest, HttpStatus.OK);
 	}
 
@@ -52,6 +52,12 @@ public class UserController {
 		userService.deleteFavSong(idUser, idSong);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	@PutMapping("/users/{idUser},{idSong}/play")
+	public ResponseEntity<?> updateNumberViews(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) {
+		userService.updateNumberViews(idUser, idSong);
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+	
 
 	//CONVERSIONES
 
@@ -63,7 +69,8 @@ public class UserController {
 				userDto.getLastName(),
 				userDto.getEmail(),
 				userDto.getPassword(),
-				userDto.getListSongFavs()
+				userDto.getListSongFavs(),
+				userDto.getViews()
 				); 
 
 	}

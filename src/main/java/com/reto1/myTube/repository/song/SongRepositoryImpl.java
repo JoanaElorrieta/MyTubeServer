@@ -20,7 +20,6 @@ public class SongRepositoryImpl implements SongRepository{
 	public List<SongDAO> findAll() {
 
 		try {
-
 			return jdbcTemplate.query(
 					"SELECT * FROM song",
 					BeanPropertyRowMapper.newInstance(SongDAO.class));

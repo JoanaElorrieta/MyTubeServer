@@ -12,11 +12,14 @@ public class UserFavsSongGetRequest {
 	private String email;
 	private String password;
 	private List<SongDTO> listSongFavs;
+	private List<Integer> views;
 	
 	public UserFavsSongGetRequest() {}
 
+	
+
 	public UserFavsSongGetRequest(int id, String name, String lastName, String email, String password,
-			List<SongDTO> listSongFavs) {
+			List<SongDTO> listSongFavs, List<Integer> views) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -24,7 +27,9 @@ public class UserFavsSongGetRequest {
 		this.email = email;
 		this.password = password;
 		this.listSongFavs = listSongFavs;
+		this.views = views;
 	}
+
 
 	public int getId() {
 		return id;
@@ -74,10 +79,19 @@ public class UserFavsSongGetRequest {
 		this.listSongFavs = listSongFavs;
 	}
 
+	public List<Integer> getViews() {
+		return views;
+	}
+
+	public void setViews(List<Integer> views) {
+		this.views = views;
+	}
+
 	@Override
 	public String toString() {
-		return "UserSongFavsGetRequest [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email
-				+ ", password=" + password + ", listSongFavs=" + listSongFavs + "]";
+		return "UserFavsSongGetRequest [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + ", listSongFavs=" + listSongFavs + ", views=" + views + "]";
 	}
+
 	
 }

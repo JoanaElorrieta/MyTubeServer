@@ -21,13 +21,17 @@ public class UserServiceImpl implements UserService{
 	SongService songService;
 	
 	@Override
-	public UserDTO findByEmail(String email) {
+	public UserDTO findByEmail(String email, String password) {
 		
-		UserDTO response = userDAOtoUserDTO(userRepository.findByEmail(email));
+		UserDTO response = userDAOtoUserDTO(userRepository.findByEmail(email, password));
 		
 		List<SongDTO> favsSongs = findFavsSongsForUser(response.getId());
 		
+		List<Integer> views= getNumberViews(response.getId());
+		
 		response.setListSongFavs(favsSongs);
+		
+		response.setViews(views);
 		
 		return response;
 	}
@@ -55,6 +59,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int deleteFavSong(int idUser, int idSong) {
 		return userRepository.deleteFavSong(idUser, idSong);
+	}
+	
+	@Override
+	public int updateNumberViews(int idUser, int idSong) {
+		return userRepository.updateNumberViews(idUser, idSong);
+	}
+	
+	@Override
+	public List<Integer> getNumberViews(int idUser) {
+		return userRepository.getNumberViews(idUser);
 	}
 	
 	//CONVERSIONES
