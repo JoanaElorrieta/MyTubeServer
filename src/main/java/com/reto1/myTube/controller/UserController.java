@@ -34,10 +34,9 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@PutMapping("/users/{email}")
-	public ResponseEntity<?> updateUser(@PathVariable("email") String email, @RequestBody UserPostRequest userPostRequest) {
-		userPostRequest.setEmail(email);
-		userService.update(userPostRequestToUserDTO(userPostRequest));
+	@PutMapping("/users/{email},{password}")
+	public ResponseEntity<?> updateUser(@PathVariable("email") String email, @PathVariable("password") String password) {
+		userService.update(email,password);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	

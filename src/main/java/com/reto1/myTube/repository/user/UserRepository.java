@@ -8,7 +8,7 @@ public interface UserRepository {
 
 	UserDAO findByEmail(String email, String password);
 	int create(UserDAO userDao);
-	int update(UserDAO userDao);
+	int update(String email, String password);
 	int createFavSong(int idUser, int idSong);
 	int deleteFavSong(int idUser, int idSong);
 	int updateNumberViews(int idUser, int idSong);

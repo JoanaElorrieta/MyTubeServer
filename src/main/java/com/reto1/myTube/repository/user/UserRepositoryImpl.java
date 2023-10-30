@@ -47,12 +47,12 @@ public class UserRepositoryImpl implements UserRepository{
 	}
 
 	@Override
-	public int update(UserDAO userDao) {
+	public int update(String email, String password) {
 		try {
 
 			return jdbcTemplate.update(
 					"UPDATE user SET password = ? WHERE email = ?",
-					new Object[] { userDao.getPassword(), userDao.getEmail() }
+					new Object[] { password, email }
 					);
 		}catch (DataIntegrityViolationException e) {
 			//TODO exceptions

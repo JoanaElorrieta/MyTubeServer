@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int update(UserDTO userDto) {
-		return userRepository.update(userDTOtoUserDAO(userDto));
+	public int update(String email, String password) {
+		return userRepository.update(email, password);
 	}
 
 	@Override
