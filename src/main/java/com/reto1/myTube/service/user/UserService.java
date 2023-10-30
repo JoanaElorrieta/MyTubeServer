@@ -9,7 +9,7 @@ public interface UserService {
 
 	UserDTO findByEmail(String email, String password);
 	int create(UserDTO userDto);
-	int update(UserDTO userDto);
+	int update(String email, String password);
 	List<SongDTO> findFavsSongsForUser(int id);
 	int createFavSong(int idUser, int idSong);
 	int deleteFavSong(int idUser, int idSong);
