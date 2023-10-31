@@ -11,13 +11,14 @@ public class UserFavsSongGetRequest {
 	private String lastName;
 	private String email;
 	private String password;
+	private String accessToken;
 	private List<SongDTO> listSongFavs;
 	private List<Integer> views;
 	
 	public UserFavsSongGetRequest() {}
 
 
-	public UserFavsSongGetRequest(int id, String name, String lastName, String email, String password,
+	public UserFavsSongGetRequest(int id, String name, String lastName, String email, String password, String accessToken,
 			List<SongDTO> listSongFavs, List<Integer> views) {
 		super();
 		this.id = id;
@@ -25,6 +26,7 @@ public class UserFavsSongGetRequest {
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.accessToken = accessToken;
 		this.listSongFavs = listSongFavs;
 		this.views = views;
 	}
@@ -69,6 +71,16 @@ public class UserFavsSongGetRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
 
 	public List<SongDTO> getListSongFavs() {
 		return listSongFavs;

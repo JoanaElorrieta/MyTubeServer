@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.reto1.myTube.model.user.UserDTO;
+import com.reto1.myTube.model.user.UserDAO;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -28,7 +28,7 @@ public class JwtTokenUtil {
 	@Value("${app.jwt.secret}")
 	private String SECRET_KEY;
 	
-	public String generateAccessToken(UserDTO user) {
+	public String generateAccessToken(UserDAO user) {
 		// cuando generamos el token podemos meter campos custom que nos puedan ser utiles mas adelante.
 		return Jwts.builder()
 				.setHeaderParam("typ","JWT")

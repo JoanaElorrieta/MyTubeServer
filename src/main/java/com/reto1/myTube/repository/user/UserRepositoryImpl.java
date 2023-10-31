@@ -1,10 +1,12 @@
 package com.reto1.myTube.repository.user;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,17 +20,13 @@ public class UserRepositoryImpl implements UserRepository{
 	private JdbcTemplate jdbcTemplate;
 
 	@Override
-	public UserDAO findByEmail(String email, String password) {
+	public Optional<UserDAO> findByEmail(String email) {
 		try {
-			return jdbcTemplate.queryForObject(
-					"SELECT * FROM user where email = ? and password = ?",
-					BeanPropertyRowMapper.newInstance(UserDAO.class),
-					email, password
-					);}
-		catch (Exception e) {
-			//TODO exceptions
-			//throw new UserNotFoundException("User not found in DataBase");
-			return null;
+			UserDAO user = jdbcTemplate.queryForObject("SELECT * from user where email = ?", BeanPropertyRowMapper.newInstance(UserDAO.class), email);
+			return Optional.of(user);
+		} catch (EmptyResultDataAccessException e){
+			e.printStackTrace();
+			return Optional.empty();
 		}
 	}
 
@@ -119,6 +117,5 @@ public class UserRepositoryImpl implements UserRepository{
 	        return null;
 	    }
 	}
-
 
 }

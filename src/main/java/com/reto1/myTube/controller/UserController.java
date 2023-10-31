@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.reto1.myTube.model.user.AuthRequest;
 import com.reto1.myTube.model.user.AuthResponse;
+import com.reto1.myTube.model.user.UserDAO;
 import com.reto1.myTube.model.user.UserDTO;
-import com.reto1.myTube.model.user.UserFavsSongGetRequest;
 import com.reto1.myTube.model.user.UserPostRequest;
 import com.reto1.myTube.security.configuration.JwtTokenUtil;
 import com.reto1.myTube.service.user.UserService;
@@ -38,11 +38,11 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-	@GetMapping("/users/{email},{password}")
-	public ResponseEntity<UserFavsSongGetRequest> getUserByEmail(@PathVariable("email") String email, @PathVariable("password") String password) {
-		UserFavsSongGetRequest userFavsSongGetRequest = userDTOtoUserFavsSongGetRequest(userService.findByEmail(email, password));
-		return new ResponseEntity<>(userFavsSongGetRequest, HttpStatus.OK);
-	}
+//	@GetMapping("/users/{email},{password}")
+//	public ResponseEntity<UserFavsSongGetRequest> getUserByEmail(@PathVariable("email") String email, @PathVariable("password") String password) {
+//		UserFavsSongGetRequest userFavsSongGetRequest = userDTOtoUserFavsSongGetRequest(userService.findByEmail(email, password));
+//		return new ResponseEntity<>(userFavsSongGetRequest, HttpStatus.OK);
+//	}
 	
 	@PostMapping("/auth/login")
 	public ResponseEntity<?> login(@RequestBody @Valid AuthRequest request) {
@@ -53,7 +53,7 @@ public class UserController {
 			); 
 			// devolvera un objeto de tipo authenticacion de las que de momento nos interesa el "principal". El principal contiene los datos del usuario
 			// por lo que lo convertimos a su modelo real de BD para tener todos sus campos
-			UserDTO user = (UserDTO) authentication.getPrincipal();
+			UserDAO user = (UserDAO) authentication.getPrincipal();
 			String accessToken = jwtUtil.generateAccessToken(user);
 			AuthResponse response = new AuthResponse(user.getEmail(), accessToken);
 			return ResponseEntity.ok().body(response);
@@ -120,19 +120,19 @@ public class UserController {
 
 	//CONVERSIONES
 
-	private UserFavsSongGetRequest userDTOtoUserFavsSongGetRequest(UserDTO userDto) {
-
-		return new UserFavsSongGetRequest(
-				userDto.getId(),
-				userDto.getName(),
-				userDto.getLastName(),
-				userDto.getEmail(),
-				userDto.getPassword(),
-				userDto.getListSongFavs(),
-				userDto.getViews()
-				); 
-
-	}
+//	private UserFavsSongGetRequest userDTOtoUserFavsSongGetRequest(UserDTO userDto) {
+//
+//		return new UserFavsSongGetRequest(
+//				userDto.getId(),
+//				userDto.getName(),
+//				userDto.getLastName(),
+//				userDto.getEmail(),
+//				userDto.getPassword(),
+//				userDto.getListSongFavs(),
+//				userDto.getViews()
+//				); 
+//
+//	}
 
 	private UserDTO userPostRequestToUserDTO(UserPostRequest userPostRequest) {
 
