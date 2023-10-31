@@ -16,5 +16,4 @@ public interface UserService {
 	int updateNumberViews(int idUser, int idSong);
 	List<Integer> getNumberViews(int idUser);
 	
-	
 }

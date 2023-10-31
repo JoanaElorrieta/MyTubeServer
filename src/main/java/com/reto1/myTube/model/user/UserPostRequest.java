@@ -6,9 +6,6 @@ import jakarta.validation.constraints.NotNull;
 
 public class UserPostRequest {
 
-	@NotNull(message = "El id no puede ser Nulo")
-	@NotBlank(message = "El id no puede ser Blanco")
-	@NotEmpty(message = "El id no puede ser Vacio")
 	private int id;
 	
 	@NotNull(message = "El nombre no puede ser Nulo")
@@ -34,7 +31,7 @@ public class UserPostRequest {
 	public UserPostRequest() {}
 
 	public UserPostRequest(
-			@NotNull(message = "El id no puede ser Nulo")@NotBlank(message = "El id no puede ser Blanco")@NotEmpty(message = "El id no puede ser Vacio")int id, 
+			int id, 
 			@NotNull(message = "El nombre no puede ser Nulo")@NotBlank(message = "El nombre no puede ser Blanco")@NotEmpty(message = "El nombre no puede ser Vacio")String name,
 			@NotNull(message = "El apellido no puede ser Nulo")@NotBlank(message = "El apellido no puede ser Blanco")@NotEmpty(message = "El apellido no puede ser Vacio")String lastName, 
 			@NotNull(message = "El email no puede ser Nulo")@NotBlank(message = "El email no puede ser Blanco")@NotEmpty(message = "El email no puede ser Vacio")String email, 

@@ -1,6 +1,5 @@
 package com.reto1.myTube.security.configuration;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +19,6 @@ import jakarta.servlet.http.HttpServletResponse;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-	
 
 	@Autowired 
 	private JwtTokenFilter jwtTokenFilter;
@@ -29,8 +27,6 @@ public class WebSecurityConfig {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
 		return authConfig.getAuthenticationManager();
 	}
-
-	
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -38,7 +34,6 @@ public class WebSecurityConfig {
 		// cuando hagamos login, comparara la contrasenia con 
 		return new BCryptPasswordEncoder();
 	}
-
 	
 	// aqui definimos principalmente cuales son las urls van a poder ser accesibles sin identificarse
 	// y cuales seran obligatorias
@@ -62,12 +57,12 @@ public class WebSecurityConfig {
 					
 				// vamos a permitir registro y login para todos. Al no especificar metodo
 				// podran hacer todos los metodos a dichas urls...
-				.requestMatchers(HttpMethod.POST, "/api/auth/login", "/api/auth/signup").permitAll()	
+				.requestMatchers(HttpMethod.POST, "/auth/login", "/auth/signup").permitAll()	
 				
 				// employees
 				// permitimos el get a cualquiera
 				//.requestMatchers("/api/employees/{id}").permitAll()
-				.requestMatchers(HttpMethod.GET, "/api/employees", "/api/employees/{id}").permitAll()
+				.requestMatchers(HttpMethod.GET, "/employees", "/employees/{id}").permitAll()
 				
 				// para todo lo demas habra que estar autenticado
 				.anyRequest().authenticated()
@@ -82,7 +77,6 @@ public class WebSecurityConfig {
  			)
 			.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 			
-
 		return http.build();
 	}
 }

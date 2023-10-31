@@ -35,13 +35,15 @@ public class UserRepositoryImpl implements UserRepository{
 	@Override
 	public int create(UserDAO userDao) {
 		try {	
+			System.out.println(userDao.getEmail());
 			return jdbcTemplate.update(
 					"INSERT INTO user ( name, lastName, email, password) VALUES(?, ?, ?, ?)",
 					new Object[] { userDao.getName(), userDao.getLastName(), userDao.getEmail(), userDao.getPassword() }
 					);
 		}catch(DataIntegrityViolationException e) {
-			//TODO exceptions
-			//throw new UserNotFoundConstraintException("Integrity fail when try to create a user");
+			e.printStackTrace();
+//			TODO exceptions
+//			throw new UserNotFoundConstraintException("Integrity fail when try to create a user");
 			return 0;
 		}
 	}

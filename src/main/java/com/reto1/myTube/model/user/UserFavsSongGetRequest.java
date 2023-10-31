@@ -16,7 +16,6 @@ public class UserFavsSongGetRequest {
 	
 	public UserFavsSongGetRequest() {}
 
-	
 
 	public UserFavsSongGetRequest(int id, String name, String lastName, String email, String password,
 			List<SongDTO> listSongFavs, List<Integer> views) {

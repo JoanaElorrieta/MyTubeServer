@@ -18,13 +18,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter {
 	
 	@Autowired
 	private JwtTokenUtil jwtUtil;
-
 	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -48,7 +46,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 		filterChain.doFilter(request, response);
 	}
 	
-	
 	private boolean hasAuthorizationBearer(HttpServletRequest request) {
 		// comprueba sin en el header existe el header de authorization y si esta bien formado
 		String header = request.getHeader("Authorization");
@@ -66,7 +63,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 		return token;
 	}
 
-
 	private void setAuthenticationContext(String token, HttpServletRequest request) {
 		// pone el usuario en el contexto con los datos del jwt
 		UserDetails userDetails = getUserDetails(token);
@@ -76,7 +72,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 		SecurityContextHolder.getContext().setAuthentication(authentication); // con esta linea se pone el usuario en el contexto
 	}
 
-	
 	private UserDetails getUserDetails(String token) {
 		// genera los detalles del usuario a partir del jwt
 		UserDAO userDetails = new UserDAO();
