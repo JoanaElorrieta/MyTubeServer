@@ -13,6 +13,7 @@ public class UserDTO {
 	private String password;
 	private List<SongDTO> listSongFavs;
 	private List<Integer> views;
+	private String accessToken;
 	
 	public UserDTO() {}
 	
@@ -23,6 +24,14 @@ public class UserDTO {
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 
 	public int getId() {

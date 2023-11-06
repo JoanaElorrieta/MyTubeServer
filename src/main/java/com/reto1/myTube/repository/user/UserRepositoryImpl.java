@@ -118,4 +118,15 @@ public class UserRepositoryImpl implements UserRepository{
 	    }
 	}
 
+	@Override
+	public UserDAO loadUser(String email) {
+		try {
+			UserDAO user = jdbcTemplate.queryForObject("SELECT * from user where email = ?", BeanPropertyRowMapper.newInstance(UserDAO.class), email);
+			return (user);
+		} catch (EmptyResultDataAccessException e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

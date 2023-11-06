@@ -38,11 +38,11 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-//	@GetMapping("/users/{email},{password}")
-//	public ResponseEntity<UserFavsSongGetRequest> getUserByEmail(@PathVariable("email") String email, @PathVariable("password") String password) {
-//		UserFavsSongGetRequest userFavsSongGetRequest = userDTOtoUserFavsSongGetRequest(userService.findByEmail(email, password));
-//		return new ResponseEntity<>(userFavsSongGetRequest, HttpStatus.OK);
-//	}
+
+	public UserDTO getUserByEmail(String email) {
+		UserDTO user = userService.loadUser(email);
+		return user;
+	}
 	
 	@PostMapping("/auth/login")
 	public ResponseEntity<?> login(@RequestBody @Valid AuthRequest request) {
@@ -105,7 +105,7 @@ public class UserController {
 	public ResponseEntity<?> getUserInfo(Authentication authentication) {
 		// aqui podemos castearlo a UserDetails o User. El UserDetails es una interfaz, 
 		// si lo casteamos a la interfaz no podremos sacar campos como la ID del usuario
-		UserDTO userDetails = (UserDTO) authentication.getPrincipal();
+		UserDAO userDetails = (UserDAO) authentication.getPrincipal();
 		
 		// IMPORTANTE: por lo tanto, la ID del usuario no tiene que ir como parametro en la peticion del usuario
 		
@@ -114,25 +114,11 @@ public class UserController {
 		// necesario en algunos servicios: si quiero devolver una lista o elemento privado del usuario, no voy a querer
 		// que el usuario mande su ID por parametro. Ya que es trampeable.
 		// de ahi que sea "/me" en el ejemplo 
-		
-		return ResponseEntity.ok().body(userDetails);
+		UserDTO user=getUserByEmail(userDetails.getEmail());
+		return ResponseEntity.ok().body(user);
 	}
 
-	//CONVERSIONES
-
-//	private UserFavsSongGetRequest userDTOtoUserFavsSongGetRequest(UserDTO userDto) {
-//
-//		return new UserFavsSongGetRequest(
-//				userDto.getId(),
-//				userDto.getName(),
-//				userDto.getLastName(),
-//				userDto.getEmail(),
-//				userDto.getPassword(),
-//				userDto.getListSongFavs(),
-//				userDto.getViews()
-//				); 
-//
-//	}
+	//CONVERSION
 
 	private UserDTO userPostRequestToUserDTO(UserPostRequest userPostRequest) {
 

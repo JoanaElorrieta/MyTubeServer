@@ -7,7 +7,7 @@ import com.reto1.myTube.model.user.UserDTO;
 
 public interface UserService {
 
-	UserDTO findByEmail(String email, String password);
+	UserDTO loadUser(String email);
 	int create(UserDTO userDto);
 	int update(String email, String password);
 	List<SongDTO> findFavsSongsForUser(int id);

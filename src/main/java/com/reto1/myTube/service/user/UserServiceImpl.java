@@ -24,20 +24,19 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 	SongService songService;
 
 	@Override
-	public UserDTO findByEmail(String email, String password) {
+	public UserDTO loadUser(String email) {
 
-		//UserDTO response = userDAOtoUserDTO(userRepository.findByEmail(email));
+		UserDTO response = userDAOtoUserDTO(userRepository.loadUser(email));
 
-//		UserDTO response = null;
-//		List<SongDTO> favsSongs = findFavsSongsForUser(response.getId());
-//
-//		List<Integer> views= getNumberViews(response.getId());
-//
-//		response.setListSongFavs(favsSongs);
-//
-//		response.setViews(views);
+		List<SongDTO> favsSongs = findFavsSongsForUser(response.getId());
 
-		return null;
+		List<Integer> views= getNumberViews(response.getId());
+
+		response.setListSongFavs(favsSongs);
+
+		response.setViews(views);
+
+		return response;
 	}
 
 	@Override
@@ -76,25 +75,25 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-				return userRepository.findByEmail(username)
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+				return userRepository.findByEmail(email)
 						.orElseThrow(
-								() -> new UsernameNotFoundException("User " + username + " not found"));
+								() -> new UsernameNotFoundException("User " + email + " not found"));
 	}
 
 	//CONVERSIONES
 
-//	private UserDTO userDAOtoUserDTO(UserDAO userDao) {
-//
-//		return new UserDTO(
-//				userDao.getId(),
-//				userDao.getName(),
-//				userDao.getLastName(),
-//				userDao.getEmail(),
-//				userDao.getPassword()
-//				); 
-//
-//	}
+	private UserDTO userDAOtoUserDTO(UserDAO userDao) {
+
+		return new UserDTO(
+				userDao.getId(),
+				userDao.getName(),
+				userDao.getLastName(),
+				userDao.getEmail(),
+				userDao.getPassword()
+				); 
+
+	}
 
 	private UserDAO userDTOtoUserDAO(UserDTO userDto) {
 
