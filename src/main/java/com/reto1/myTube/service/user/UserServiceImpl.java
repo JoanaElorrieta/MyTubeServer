@@ -64,10 +64,7 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 		return userRepository.deleteFavSong(idUser, idSong);
 	}
 
-	@Override
-	public int updateNumberViews(int idUser, int idSong) {
-		return userRepository.updateNumberViews(idUser, idSong);
-	}
+
 
 	@Override
 	public List<Integer> getNumberViews(int idUser) {

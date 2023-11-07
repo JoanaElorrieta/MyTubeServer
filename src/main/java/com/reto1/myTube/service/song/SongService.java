@@ -12,5 +12,7 @@ public interface SongService {
 	int update(SongDTO songDto);
 	int deleteById(int id);
 	List<SongDTO> findFavsSongsForUser(int id);
+	int updateNumberViews(int idUser, int idSong);
+	int insertNumberViews(int idUser, int idSong);
 	
 }

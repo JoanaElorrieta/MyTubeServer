@@ -13,6 +13,5 @@ public interface UserRepository {
 	int update(String email, String password);
 	int createFavSong(int idUser, int idSong);
 	int deleteFavSong(int idUser, int idSong);
-	int updateNumberViews(int idUser, int idSong);
 	List<Integer> getNumberViews(int idUser);
 }

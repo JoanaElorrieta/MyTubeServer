@@ -103,5 +103,31 @@ public class SongRepositoryImpl implements SongRepository{
 				id
 				);
 	}
+	@Override
+	public int updateNumberViews(int idUser, int idSong) {
+		try {	
+			return jdbcTemplate.update(
+					"UPDATE play SET views=views+1 WHERE id_user = ? AND id_song = ?",
+					new Object[] { idUser, idSong }
+					);
+		}catch(DataIntegrityViolationException e) {
+			//TODO exceptions
+			//throw new UserNotFoundConstraintException("Integrity fail when try to create a user");
+			return 0;
+		}
+	}
+	@Override
+	public int insertNumberViews(int idUser, int idSong) {
+		try {	
+			return jdbcTemplate.update(
+					"INSERT INTO song ( id_song, id_user, views ) VALUES(?, ?, 1)",
+					new Object[] { idSong, idUser}
+					);
+		}catch(DataIntegrityViolationException e) {
+			//TODO exceptions
+			//throw new UserNotFoundConstraintException("Integrity fail when try to create a user");
+			return 0;
+		}
+	}
 
 }

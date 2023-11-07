@@ -89,19 +89,7 @@ public class UserRepositoryImpl implements UserRepository{
 		}
 	}
 
-	@Override
-	public int updateNumberViews(int idUser, int idSong) {
-		try {	
-			return jdbcTemplate.update(
-					"UPDATE play SET views=views+1 WHERE id_user = ? AND id_song = ?",
-					new Object[] { idUser, idSong }
-					);
-		}catch(DataIntegrityViolationException e) {
-			//TODO exceptions
-			//throw new UserNotFoundConstraintException("Integrity fail when try to create a user");
-			return 0;
-		}
-	}
+	
 
 	public List<Integer> getNumberViews(int idUser) {
 	    try {

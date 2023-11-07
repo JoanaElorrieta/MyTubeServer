@@ -94,11 +94,6 @@ public class UserController {
 		userService.deleteFavSong(idUser, idSong);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	@PutMapping("/users/{idUser},{idSong}/play")
-	public ResponseEntity<?> updateNumberViews(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) {
-		userService.updateNumberViews(idUser, idSong);
-		return new ResponseEntity<>(HttpStatus.CREATED);
-	}
 	
 	// utilizamos el /me por que vamos a coger el nuestro, el que estamos logueado...
 	@GetMapping("/auth/me")

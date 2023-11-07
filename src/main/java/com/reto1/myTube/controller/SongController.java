@@ -56,6 +56,16 @@ public class SongController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		
 	}
+	@PutMapping("/songs/{idUser},{idSong}/play")
+	public ResponseEntity<?> updateNumberViews(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) {
+		songService.updateNumberViews(idUser, idSong);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	@PostMapping("/songs/{idUser},{idSong}/play")
+	public ResponseEntity<?> insertNumberViews(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) {
+		songService.insertNumberViews(idUser, idSong);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 
 	//Conversiones
 

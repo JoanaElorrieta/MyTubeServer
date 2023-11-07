@@ -45,7 +45,14 @@ public class SongServiceImpl implements SongService{
 	public List<SongDTO> findFavsSongsForUser(int id) {
 		return songDAOListToSongDTOList(songRepository.getFavsSongsForCertainUser(id));
 	}
-
+	@Override
+	public int updateNumberViews(int idUser, int idSong) {
+		return songRepository.updateNumberViews(idUser, idSong);
+	}
+	@Override
+	public int insertNumberViews(int idUser, int idSong) {
+		return songRepository.insertNumberViews(idUser, idSong);
+	}
 	//CONVERSIONES
 	
 	private SongDTO songDAOtoSongDTO(SongDAO songDao) {
