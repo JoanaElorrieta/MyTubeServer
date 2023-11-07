@@ -53,6 +53,10 @@ public class SongServiceImpl implements SongService{
 	public int insertNumberViews(int idUser, int idSong) {
 		return songRepository.insertNumberViews(idUser, idSong);
 	}
+	@Override
+	public int selectNumberViews(int idUser, int idSong) {
+		return songRepository.insertNumberViews(idUser, idSong);
+	}
 	//CONVERSIONES
 	
 	private SongDTO songDAOtoSongDTO(SongDAO songDao) {

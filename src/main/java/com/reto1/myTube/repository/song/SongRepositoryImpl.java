@@ -3,6 +3,7 @@ package com.reto1.myTube.repository.song;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -97,10 +98,10 @@ public class SongRepositoryImpl implements SongRepository{
 	public List<SongDAO> getFavsSongsForCertainUser(int id) {
 		return jdbcTemplate.query(
 				"SELECT song.id, song.title, song.author, song.url FROM song\r\n"
-				+ "JOIN favorite on song.id = favorite.id_song\r\n"
-				+ "WHERE favorite.id_user = ?",
-				BeanPropertyRowMapper.newInstance(SongDAO.class),
-				id
+						+ "JOIN favorite on song.id = favorite.id_song\r\n"
+						+ "WHERE favorite.id_user = ?",
+						BeanPropertyRowMapper.newInstance(SongDAO.class),
+						id
 				);
 	}
 	@Override
@@ -129,5 +130,25 @@ public class SongRepositoryImpl implements SongRepository{
 			return 0;
 		}
 	}
+	@Override
+	public int selectNumberViews(int idUser, int idSong) {
+		  try {
+		        List<Integer> views = jdbcTemplate.queryForList(
+		            "SELECT views FROM play WHERE id_user = ? and id_song= ?",
+		            Integer.class,
+		            idUser,idSong
+		        );
+		        if (!views.isEmpty()) {
+		            int result = views.get(0);
+		            return result;
+		        } else {
+		            return 0; // Devuelve 0 si no se encontraron registros
+		        }
+		    } catch (DataAccessException e) {
+
+		        return 0;
+		    }
+	}
+
 
 }

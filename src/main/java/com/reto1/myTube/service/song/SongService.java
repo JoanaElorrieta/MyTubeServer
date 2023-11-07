@@ -14,5 +14,6 @@ public interface SongService {
 	List<SongDTO> findFavsSongsForUser(int id);
 	int updateNumberViews(int idUser, int idSong);
 	int insertNumberViews(int idUser, int idSong);
+	int selectNumberViews(int idUser, int idSong);
 	
 }
