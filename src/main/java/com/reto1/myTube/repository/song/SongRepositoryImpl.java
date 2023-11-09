@@ -95,14 +95,16 @@ public class SongRepositoryImpl implements SongRepository{
 	}
 
 	@Override
-	public List<SongDAO> getFavsSongsForCertainUser(int id) {
-		return jdbcTemplate.query(
-				"SELECT song.id, song.title, song.author, song.url FROM song\r\n"
-						+ "JOIN favorite on song.id = favorite.id_song\r\n"
-						+ "WHERE favorite.id_user = ?",
-						BeanPropertyRowMapper.newInstance(SongDAO.class),
-						id
+	public Integer getFavsSongsForCertainUser(int id, int idSong) {
+		try {
+		return jdbcTemplate.queryForObject(
+				"SELECT CASE WHEN f.id_song IS NOT NULL THEN 1 ELSE 0 END AS is_favorite FROM song s LEFT JOIN favorite f ON s.id = f.id_song AND f.id_user = ? WHERE s.id = ?;",
+				Integer.class,
+				id, idSong
 				);
+		 } catch (DataAccessException e) {
+		        return 0; 
+		    }
 	}
 	@Override
 	public int updateNumberViews(int idUser, int idSong) {
@@ -121,7 +123,7 @@ public class SongRepositoryImpl implements SongRepository{
 	public int insertNumberViews(int idUser, int idSong) {
 		try {	
 			return jdbcTemplate.update(
-					"INSERT INTO song ( id_song, id_user, views ) VALUES(?, ?, 1)",
+					"INSERT INTO play ( id_song, id_user, views ) VALUES(?, ?, 1)",
 					new Object[] { idSong, idUser}
 					);
 		}catch(DataIntegrityViolationException e) {
@@ -131,23 +133,17 @@ public class SongRepositoryImpl implements SongRepository{
 		}
 	}
 	@Override
-	public int selectNumberViews(int idUser, int idSong) {
-		  try {
-		        List<Integer> views = jdbcTemplate.queryForList(
-		            "SELECT views FROM play WHERE id_user = ? and id_song= ?",
-		            Integer.class,
-		            idUser,idSong
-		        );
-		        if (!views.isEmpty()) {
-		            int result = views.get(0);
-		            return result;
-		        } else {
-		            return 0; // Devuelve 0 si no se encontraron registros
-		        }
-		    } catch (DataAccessException e) {
+	public Integer selectNumberViews(int idUser, int idSong) {
+	    try {
+	        return jdbcTemplate.queryForObject(
+	                "SELECT COALESCE(play.views, 0) AS views FROM song LEFT JOIN play ON song.id = play.id_song AND play.id_user = ? where id=?",
+	                Integer.class,
+	                idUser,idSong
+	        );
 
-		        return 0;
-		    }
+	    } catch (DataAccessException e) {
+	        return 0; 
+	    }
 	}
 
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.reto1.myTube.model.song.SongDAO;
 import com.reto1.myTube.model.song.SongDTO;
+import com.reto1.myTube.model.song.SongFavsViewsRequest;
 import com.reto1.myTube.repository.song.SongRepository;
 
 @Service
@@ -43,7 +44,8 @@ public class SongServiceImpl implements SongService{
 	
 	@Override
 	public List<SongDTO> findFavsSongsForUser(int id) {
-		return songDAOListToSongDTOList(songRepository.getFavsSongsForCertainUser(id));
+		List<SongDTO> response= songDAOtoSongFav(songRepository.findAll(), id);
+		return response;
 	}
 	@Override
 	public int updateNumberViews(int idUser, int idSong) {
@@ -54,8 +56,8 @@ public class SongServiceImpl implements SongService{
 		return songRepository.insertNumberViews(idUser, idSong);
 	}
 	@Override
-	public int selectNumberViews(int idUser, int idSong) {
-		return songRepository.insertNumberViews(idUser, idSong);
+	public Integer selectNumberViews(int idUser, int idSong) {
+		return songRepository.selectNumberViews(idUser, idSong);
 	}
 	//CONVERSIONES
 	
@@ -81,6 +83,24 @@ public class SongServiceImpl implements SongService{
 		}
 
 		return songDTOList;
+
+	}
+	
+	private List<SongDTO> songDAOtoSongFav(List<SongDAO> songDaoList, int id) {
+
+		List<SongDTO> songFavList = new ArrayList<SongDTO>();
+
+		for (SongDAO songDAO : songDaoList) {
+			SongDTO response=songDAOtoSongDTO(songDAO);
+			Integer favorite=songRepository.getFavsSongsForCertainUser(id,songDAO.getId());		
+			Integer views=songRepository.selectNumberViews(id,songDAO.getId());
+			response.setViews(views);
+			response.setFavorite(favorite);
+			songFavList.add(response);
+
+		}
+
+		return songFavList;
 
 	}
 
