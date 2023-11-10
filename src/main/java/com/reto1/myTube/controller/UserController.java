@@ -40,8 +40,7 @@ public class UserController {
 
 
 	public UserDTO getUserByEmail(String email) {
-		UserDTO user = userService.loadUser(email);
-		return user;
+		return  userService.loadUser(email);
 	}
 	
 	@PostMapping("/auth/login")

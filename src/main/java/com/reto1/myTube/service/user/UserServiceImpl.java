@@ -26,17 +26,8 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 	@Override
 	public UserDTO loadUser(String email) {
 
-		UserDTO response = userDAOtoUserDTO(userRepository.loadUser(email));
+		return userDAOtoUserDTO(userRepository.loadUser(email));
 
-		List<SongDTO> favsSongs = null;
-
-		List<Integer> views= getNumberViews(response.getId());
-
-		response.setListSongFavs(favsSongs);
-
-		response.setViews(views);
-
-		return response;
 	}
 
 	@Override
