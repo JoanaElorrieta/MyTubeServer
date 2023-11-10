@@ -65,6 +65,8 @@ public class WebSecurityConfig {
 				.requestMatchers(HttpMethod.GET, "/employees", "/employees/{id}", "/songs").permitAll()
 				
 				
+				.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+				
 				// para todo lo demas habra que estar autenticado
 				.anyRequest().authenticated()
 			)
