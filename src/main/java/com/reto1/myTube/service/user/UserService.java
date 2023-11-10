@@ -10,7 +10,6 @@ public interface UserService {
 	UserDTO loadUser(String email);
 	int create(UserDTO userDto);
 	int update(String email, String password);
-	List<SongDTO> findFavsSongsForUser(int id);
 	int createFavSong(int idUser, int idSong);
 	int deleteFavSong(int idUser, int idSong);
 	List<Integer> getNumberViews(int idUser);

@@ -3,6 +3,7 @@ package com.reto1.myTube.repository.song;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -94,14 +95,16 @@ public class SongRepositoryImpl implements SongRepository{
 	}
 
 	@Override
-	public List<SongDAO> getFavsSongsForCertainUser(int id) {
-		return jdbcTemplate.query(
-				"SELECT song.id, song.title, song.author, song.url FROM song\r\n"
-				+ "JOIN favorite on song.id = favorite.id_song\r\n"
-				+ "WHERE favorite.id_user = ?",
-				BeanPropertyRowMapper.newInstance(SongDAO.class),
-				id
+	public Integer getFavsSongsForCertainUser(int id, int idSong) {
+		try {
+		return jdbcTemplate.queryForObject(
+				"SELECT CASE WHEN f.id_song IS NOT NULL THEN 1 ELSE 0 END AS is_favorite FROM song s LEFT JOIN favorite f ON s.id = f.id_song AND f.id_user = ? WHERE s.id = ?;",
+				Integer.class,
+				id, idSong
 				);
+		 } catch (DataAccessException e) {
+		        return 0; 
+		    }
 	}
 	@Override
 	public int updateNumberViews(int idUser, int idSong) {
@@ -120,7 +123,7 @@ public class SongRepositoryImpl implements SongRepository{
 	public int insertNumberViews(int idUser, int idSong) {
 		try {	
 			return jdbcTemplate.update(
-					"INSERT INTO song ( id_song, id_user, views ) VALUES(?, ?, 1)",
+					"INSERT INTO play ( id_song, id_user, views ) VALUES(?, ?, 1)",
 					new Object[] { idSong, idUser}
 					);
 		}catch(DataIntegrityViolationException e) {
@@ -129,5 +132,19 @@ public class SongRepositoryImpl implements SongRepository{
 			return 0;
 		}
 	}
+	@Override
+	public Integer selectNumberViews(int idUser, int idSong) {
+	    try {
+	        return jdbcTemplate.queryForObject(
+	                "SELECT COALESCE(play.views, 0) AS views FROM song LEFT JOIN play ON song.id = play.id_song AND play.id_user = ? where id=?",
+	                Integer.class,
+	                idUser,idSong
+	        );
+
+	    } catch (DataAccessException e) {
+	        return 0; 
+	    }
+	}
+
 
 }

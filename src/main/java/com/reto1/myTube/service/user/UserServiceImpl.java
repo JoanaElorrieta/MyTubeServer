@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 
 		UserDTO response = userDAOtoUserDTO(userRepository.loadUser(email));
 
-		List<SongDTO> favsSongs = findFavsSongsForUser(response.getId());
+		List<SongDTO> favsSongs = null;
 
 		List<Integer> views= getNumberViews(response.getId());
 
@@ -49,10 +49,6 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 		return userRepository.update(email, password);
 	}
 
-	@Override
-	public List<SongDTO> findFavsSongsForUser(int id) {
-		return songService.findFavsSongsForUser(id);
-	}
 
 	@Override
 	public int createFavSong(int idUser, int idSong) {

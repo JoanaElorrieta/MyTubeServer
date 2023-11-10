@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reto1.myTube.model.song.SongDTO;
+import com.reto1.myTube.model.song.SongFavsViewsRequest;
 import com.reto1.myTube.model.song.SongGetRequest;
 import com.reto1.myTube.model.song.SongPostRequest;
 import com.reto1.myTube.service.song.SongService;
@@ -34,6 +35,11 @@ public class SongController {
 	public ResponseEntity<SongGetRequest> getSongById(@PathVariable("id") int id) {
 		SongGetRequest songGetRequest = songDTOToSongGetRequest(songService.findById(id));
 		return new ResponseEntity<>(songGetRequest, HttpStatus.OK);
+	}
+	@GetMapping("/songs/user/{id}")
+	public ResponseEntity<List<SongFavsViewsRequest>> getSongsFavoriteViews(@PathVariable("id") int id) {
+		List<SongFavsViewsRequest> songFavsViewsRequest = songDTOListToSongFavsViewsRequestList(songService.findFavsSongsForUser(id));
+		return new ResponseEntity<>(songFavsViewsRequest, HttpStatus.OK);
 	}
 
 	@PostMapping("/songs")
@@ -77,6 +83,31 @@ public class SongController {
 				songPostRequest.getAuthor(), 
 				songPostRequest.getUrl()
 				); 
+
+	}
+	public SongFavsViewsRequest songDTOToSongFavsViewsRequest(SongDTO songDTO) {
+
+		return new SongFavsViewsRequest(
+				songDTO.getId(), 
+				songDTO.getTitle(), 
+				songDTO.getAuthor(), 
+				songDTO.getUrl(),
+				songDTO.getFavorite(),
+				songDTO.getViews()
+				); 
+
+	}
+	public List<SongFavsViewsRequest> songDTOListToSongFavsViewsRequestList(List<SongDTO> songDtoList) {
+
+		List<SongFavsViewsRequest> songFavsViewsRequest = new ArrayList<SongFavsViewsRequest>();
+
+		for (SongDTO songDTO : songDtoList) {
+
+			songFavsViewsRequest.add(songDTOToSongFavsViewsRequest(songDTO));
+
+		}
+
+		return songFavsViewsRequest;
 
 	}
 
