@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.reto1.myTube.exception.user.FavoriteUserSongConstraintException;
+import com.reto1.myTube.exception.user.FavoriteUserSongNotFoundException;
+import com.reto1.myTube.exception.user.UserNotFoundConstraintException;
+import com.reto1.myTube.exception.user.UserNumberViewsNotFoundException;
 import com.reto1.myTube.model.user.AuthRequest;
 import com.reto1.myTube.model.user.AuthResponse;
 import com.reto1.myTube.model.user.UserDAO;
@@ -39,7 +43,7 @@ public class UserController {
 	UserService userService;
 
 
-	public UserDTO getUserByEmail(String email) {
+	public UserDTO getUserByEmail(String email) throws UserNumberViewsNotFoundException {
 		UserDTO user = userService.loadUser(email);
 		return user;
 	}
@@ -65,7 +69,7 @@ public class UserController {
 	}
 
 	@PostMapping("/auth/signup")
-	public ResponseEntity<?> signIn(@RequestBody @Valid UserPostRequest request) {
+	public ResponseEntity<?> signIn(@RequestBody @Valid UserPostRequest request) throws UserNotFoundConstraintException {
 		// TODO solo esta creado en el caso de que funcione. Si no es posible que de 500 o 401.
 		// aqui hacer lo que sea preciso
 		// vamos a cifrar la contrasenia aqui, ya que no queremos andar dando vueltas con la contraseña sin encriptar si no es preciso
@@ -78,37 +82,27 @@ public class UserController {
 	}
 
 	@PutMapping("/users/{email},{password}")
-	public ResponseEntity<?> updateUser(@PathVariable("email") String email, @PathVariable("password") String password) {
+	public ResponseEntity<?> updateUser(@PathVariable("email") String email, @PathVariable("password") String password) throws UserNotFoundConstraintException {
 		userService.update(email,password);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PostMapping("/users/{idUser},{idSong}/favorite")
-	public ResponseEntity<?> createFavSongForUser(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) {
+	public ResponseEntity<?> createFavSongForUser(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) throws FavoriteUserSongConstraintException {
 		userService.createFavSong(idUser, idSong);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/users/{idUser},{idSong}/favorite")
-	public ResponseEntity<?> deleteFavSongForUser(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) {
+	public ResponseEntity<?> deleteFavSongForUser(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) throws FavoriteUserSongNotFoundException {
 		userService.deleteFavSong(idUser, idSong);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	// utilizamos el /me por que vamos a coger el nuestro, el que estamos logueado...
 	@GetMapping("/auth/me")
-	public ResponseEntity<?> getUserInfo(Authentication authentication) {
-		// aqui podemos castearlo a UserDetails o User. El UserDetails es una interfaz, 
-		// si lo casteamos a la interfaz no podremos sacar campos como la ID del usuario
+	public ResponseEntity<?> getUserInfo(Authentication authentication) throws UserNumberViewsNotFoundException {
 		UserDAO userDetails = (UserDAO) authentication.getPrincipal();
-		
-		// IMPORTANTE: por lo tanto, la ID del usuario no tiene que ir como parametro en la peticion del usuario
-		
-		// aqui podriamos devolver datos del usuario. quizá no sea lo que queremos devolver o no lo querramos devolver
-		// es un ejemplo por que con userDetails.getId() tendríamos la ID del usuario sin que la pase por parametro
-		// necesario en algunos servicios: si quiero devolver una lista o elemento privado del usuario, no voy a querer
-		// que el usuario mande su ID por parametro. Ya que es trampeable.
-		// de ahi que sea "/me" en el ejemplo 
 		UserDTO user=getUserByEmail(userDetails.getEmail());
 		return ResponseEntity.ok().body(user);
 	}

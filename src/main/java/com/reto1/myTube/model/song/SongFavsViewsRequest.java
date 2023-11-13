@@ -1,7 +1,5 @@
 package com.reto1.myTube.model.song;
 
-import java.util.List;
-
 public class SongFavsViewsRequest {
 	
 	private int id;

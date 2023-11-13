@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.reto1.myTube.exception.song.SongConstraintException;
+import com.reto1.myTube.exception.song.SongNotFoundException;
+import com.reto1.myTube.exception.user.UserNumberViewsConstraintException;
+import com.reto1.myTube.exception.user.UserNumberViewsNotFoundException;
 import com.reto1.myTube.model.song.SongDTO;
 import com.reto1.myTube.model.song.SongFavsViewsRequest;
 import com.reto1.myTube.model.song.SongGetRequest;
@@ -27,48 +31,48 @@ public class SongController {
 	SongService songService;
 
 	@GetMapping("/songs")
-	public ResponseEntity<List<SongGetRequest>> getSong() {
+	public ResponseEntity<List<SongGetRequest>> getSong() throws SongNotFoundException {
 		return new ResponseEntity<>(songDtoListToSongGetRequestList(songService.findAll()), HttpStatus.OK);
 	}
 
 	@GetMapping("/songs/{id}")
-	public ResponseEntity<SongGetRequest> getSongById(@PathVariable("id") int id) {
+	public ResponseEntity<SongGetRequest> getSongById(@PathVariable("id") int id) throws SongNotFoundException {
 		SongGetRequest songGetRequest = songDTOToSongGetRequest(songService.findById(id));
 		return new ResponseEntity<>(songGetRequest, HttpStatus.OK);
 	}
 	@GetMapping("/songs/user/{id}")
-	public ResponseEntity<List<SongFavsViewsRequest>> getSongsFavoriteViews(@PathVariable("id") int id) {
+	public ResponseEntity<List<SongFavsViewsRequest>> getSongsFavoriteViews(@PathVariable("id") int id) throws SongNotFoundException, UserNumberViewsNotFoundException {
 		List<SongFavsViewsRequest> songFavsViewsRequest = songDTOListToSongFavsViewsRequestList(songService.findFavsSongsForUser(id));
 		return new ResponseEntity<>(songFavsViewsRequest, HttpStatus.OK);
 	}
 
 	@PostMapping("/songs")
-	public ResponseEntity<?> createSong(@RequestBody SongPostRequest songPostRequest) {
+	public ResponseEntity<?> createSong(@RequestBody SongPostRequest songPostRequest) throws SongConstraintException {
 		songService.create(songPostRequestToSongDTO(songPostRequest));
 		return new ResponseEntity<>(HttpStatus.CREATED);
 
 	}
 	
 	@PutMapping("/songs/{id}")
-	public ResponseEntity<?> updateSong(@PathVariable("id") int id, @RequestBody SongPostRequest songPostRequest) {
+	public ResponseEntity<?> updateSong(@PathVariable("id") int id, @RequestBody SongPostRequest songPostRequest) throws SongConstraintException {
 		songPostRequest.setId(id);
 		songService.update(songPostRequestToSongDTO(songPostRequest));
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/songs/{id}")
-	public ResponseEntity<?> deleteSong(@PathVariable("id") int id) {
+	public ResponseEntity<?> deleteSong(@PathVariable("id") int id) throws SongNotFoundException {
 		songService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		
 	}
 	@PutMapping("/songs/{idUser},{idSong}/play")
-	public ResponseEntity<?> updateNumberViews(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) {
+	public ResponseEntity<?> updateNumberViews(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) throws UserNumberViewsConstraintException {
 		songService.updateNumberViews(idUser, idSong);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	@PostMapping("/songs/{idUser},{idSong}/play")
-	public ResponseEntity<?> insertNumberViews(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) {
+	public ResponseEntity<?> insertNumberViews(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) throws UserNumberViewsConstraintException {
 		songService.insertNumberViews(idUser, idSong);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

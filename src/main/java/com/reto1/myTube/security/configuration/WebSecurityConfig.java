@@ -62,7 +62,7 @@ public class WebSecurityConfig {
 				// employees
 				// permitimos el get a cualquiera
 				//.requestMatchers("/api/employees/{id}").permitAll()
-				.requestMatchers(HttpMethod.GET, "/employees", "/employees/{id}", "/songs").permitAll()
+				.requestMatchers(HttpMethod.GET, "/songs").permitAll()
 				
 				
 				.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
