@@ -1,16 +1,16 @@
 {
 	"info": {
-		"_postman_id": "7849bc5c-d99e-4f56-8c58-13170c22dd48",
+		"_postman_id": "fd43aa4f-8720-4cb0-a196-e6193712d731",
 		"name": "RetoMyTube",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29686330"
+		"_exporter_id": "30744038"
 	},
 	"item": [
 		{
 			"name": "Songs",
 			"item": [
 				{
-					"name": "findAll",
+					"name": "getAllSongs",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -28,10 +28,16 @@
 					"response": []
 				},
 				{
-					"name": "findById",
+					"name": "getSongById",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "localhost:8080/songs/1",
 							"host": [
@@ -47,13 +53,45 @@
 					"response": []
 				},
 				{
-					"name": "create",
+					"name": "getSongsFavoriteViews",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/songs/user/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songs",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createSong",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\r\n    \"title\": \"Prueba1\",\r\n    \"author\": \"Prueba1\",\r\n    \"url\": \"Prueba1\"\r\n\r\n}",
+							"raw": "{\r\n\r\n    \"title\": \"Prueba1\",\r\n    \"author\": \"Prueba1\",\r\n    \"url\": \"https://123.com\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -74,10 +112,76 @@
 					"response": []
 				},
 				{
-					"name": "delete",
+					"name": "insertNumberViews",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/songs/4,1/play",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songs",
+								"4,1",
+								"play"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSong",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/songs/6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songs",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateSong",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"title\": \"Prueba2\",\r\n    \"author\": \"Prueba2\",\r\n    \"url\": \"https://123.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "localhost:8080/songs/4",
 							"host": [
@@ -93,28 +197,26 @@
 					"response": []
 				},
 				{
-					"name": "upate",
+					"name": "updateNumberViews",
 					"request": {
 						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\r\n    \"title\": \"Prueba2\",\r\n    \"author\": \"Prueba2\",\r\n    \"url\": \"Prueba2\"\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
+								"type": "text"
 							}
-						},
+						],
 						"url": {
-							"raw": "localhost:8080/songs/5",
+							"raw": "localhost:8080/songs/1,1/play",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"songs",
-								"5"
+								"1,1",
+								"play"
 							]
 						}
 					},
@@ -126,56 +228,16 @@
 			"name": "Users",
 			"item": [
 				{
-					"name": "findByEmail",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/users/amanciortega@gmail.com",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"amanciortega@gmail.com"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "create",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\r\n    \"name\": \"Prueba1\",\r\n    \"lastName\": \"Prueba1\",\r\n    \"email\": \"Prueba1\",\r\n    \"password\": \"Prueba1\"\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8080/users",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
+					"name": "updateUser",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1ODg2LCJleHAiOjE2OTk5OTIyODYsInVzZXJJZCI6OX0.lGao2hXzUihL-9rYgQJbl782zWPMcTBP-4T5WuRP--L6vPhfJiMTGemDuyPJo97I2Z2sygIS_fE7X5LV-G4WBA",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n\r\n    \"name\": \"Prueba2\",\r\n    \"lastName\": \"Prueba2\",\r\n    \"email\": \"Prueba2\",\r\n    \"password\": \"Prueba2\"\r\n\r\n}",
@@ -186,24 +248,30 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/users/amanciortega@gmail.com",
+							"raw": "localhost:8080/users/amanciortega@gmail.com,12341234",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"users",
-								"amanciortega@gmail.com"
+								"amanciortega@gmail.com,12341234"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "createFavSong",
+					"name": "createFavSongForUser",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1ODg2LCJleHAiOjE2OTk5OTIyODYsInVzZXJJZCI6OX0.lGao2hXzUihL-9rYgQJbl782zWPMcTBP-4T5WuRP--L6vPhfJiMTGemDuyPJo97I2Z2sygIS_fE7X5LV-G4WBA",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -229,20 +297,113 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "deleteFavSongForUser",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1ODg2LCJleHAiOjE2OTk5OTIyODYsInVzZXJJZCI6OX0.lGao2hXzUihL-9rYgQJbl782zWPMcTBP-4T5WuRP--L6vPhfJiMTGemDuyPJo97I2Z2sygIS_fE7X5LV-G4WBA",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:8080/users/1,1/favorite",
+							"raw": "localhost:8080/users/1,3/favorite",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"users",
-								"1,1",
+								"1,3",
 								"favorite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"name\": \"Prueba66\",\r\n    \"lastName\": \"Prueba66\",\r\n    \"email\": \"prueba66@gmail.com\",\r\n    \"password\": \"prueba6\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserInfo",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA2NDI0LCJleHAiOjE2OTk5OTI4MjQsInVzZXJJZCI6OX0.8POS_S5YCvAiOiNek-imYGvJ4X5fRip4ImZcJ_wrBwwUdSh1SG4O5jH7v_A0jJnlela9Bp_KlX4Kft5-GdZnaA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/auth/me",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer askfhsuifhw38y948twe98chw89r39583thguifcbil8vryiyrtv4tyw37ry3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"email\": \"prueba99@gmail.com\",\r\n    \"password\": \"prueba99\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
 							]
 						}
 					},
