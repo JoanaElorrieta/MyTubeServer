@@ -12,7 +12,6 @@ import com.reto1.myTube.exception.user.FavoriteUserSongConstraintException;
 import com.reto1.myTube.exception.user.FavoriteUserSongNotFoundException;
 import com.reto1.myTube.exception.user.UserNotFoundConstraintException;
 import com.reto1.myTube.exception.user.UserNumberViewsNotFoundException;
-import com.reto1.myTube.model.song.SongDTO;
 import com.reto1.myTube.model.user.UserDAO;
 import com.reto1.myTube.model.user.UserDTO;
 import com.reto1.myTube.repository.user.UserRepository;
@@ -30,17 +29,8 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 	@Override
 	public UserDTO loadUser(String email) throws UserNumberViewsNotFoundException {
 
-		UserDTO response = userDAOtoUserDTO(userRepository.loadUser(email));
+		return userDAOtoUserDTO(userRepository.loadUser(email));
 
-		List<SongDTO> favsSongs = null;
-
-		List<Integer> views= getNumberViews(response.getId());
-
-		response.setListSongFavs(favsSongs);
-
-		response.setViews(views);
-
-		return response;
 	}
 
 	@Override

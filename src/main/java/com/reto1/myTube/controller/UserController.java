@@ -42,7 +42,6 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
-
 	public UserDTO getUserByEmail(String email) throws UserNumberViewsNotFoundException {
 		UserDTO user = userService.loadUser(email);
 		return user;
