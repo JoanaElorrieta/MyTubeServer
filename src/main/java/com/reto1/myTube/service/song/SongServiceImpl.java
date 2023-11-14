@@ -19,7 +19,7 @@ public class SongServiceImpl implements SongService{
 
 	@Autowired
 	SongRepository songRepository;
-
+	
 	@Override
 	public List<SongDTO> findAll() throws SongNotFoundException {
 		return songDAOListToSongDTOList(songRepository.findAll());
@@ -47,7 +47,7 @@ public class SongServiceImpl implements SongService{
 	
 	@Override
 	public List<SongDTO> findFavsSongsForUser(int id) throws SongNotFoundException, UserNumberViewsNotFoundException {
-		List<SongDTO> response= songDAOtoSongFav(songRepository.findAll(), id);
+		List<SongDTO> response = songDAOtoSongFav(songRepository.findAll(), id);
 		return response;
 	}
 	@Override

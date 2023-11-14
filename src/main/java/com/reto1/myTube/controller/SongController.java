@@ -50,7 +50,6 @@ public class SongController {
 	public ResponseEntity<?> createSong(@RequestBody SongPostRequest songPostRequest) throws SongConstraintException {
 		songService.create(songPostRequestToSongDTO(songPostRequest));
 		return new ResponseEntity<>(HttpStatus.CREATED);
-
 	}
 	
 	@PutMapping("/songs/{id}")
@@ -64,7 +63,6 @@ public class SongController {
 	public ResponseEntity<?> deleteSong(@PathVariable("id") int id) throws SongNotFoundException {
 		songService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		
 	}
 	@PutMapping("/songs/{idUser},{idSong}/play")
 	public ResponseEntity<?> updateNumberViews(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) throws UserNumberViewsConstraintException {

@@ -21,7 +21,7 @@ import com.reto1.myTube.service.song.SongService;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService{
-
+	
 	@Autowired
 	UserRepository userRepository;
 
@@ -33,9 +33,7 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 
 	@Override
 	public UserDTO loadUser(String email) throws UserNumberViewsNotFoundException {
-
 		return userDAOtoUserDTO(userRepository.loadUser(email));
-
 	}
 
 	@Override
@@ -55,7 +53,6 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 		
 	}
 
-
 	@Override
 	public int createFavSong(int idUser, int idSong) throws FavoriteUserSongConstraintException {
 		return userRepository.createFavSong(idUser, idSong);
@@ -65,8 +62,6 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 	public int deleteFavSong(int idUser, int idSong) throws FavoriteUserSongNotFoundException {
 		return userRepository.deleteFavSong(idUser, idSong);
 	}
-
-
 
 	@Override
 	public List<Integer> getNumberViews(int idUser) throws UserNumberViewsNotFoundException {
@@ -90,7 +85,6 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 	//CONVERSIONES
 
 	private UserDTO userDAOtoUserDTO(UserDAO userDao) {
-
 		return new UserDTO(
 				userDao.getId(),
 				userDao.getName(),
@@ -98,11 +92,9 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 				userDao.getEmail(),
 				userDao.getPassword()
 				); 
-
 	}
 
 	private UserDAO userDTOtoUserDAO(UserDTO userDto) {
-
 		return new UserDAO(
 				userDto.getId(),
 				userDto.getName(),
@@ -110,7 +102,6 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 				userDto.getEmail(),
 				userDto.getPassword()
 				); 
-
 	}
 
 }

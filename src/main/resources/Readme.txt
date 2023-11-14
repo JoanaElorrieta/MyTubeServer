@@ -37,12 +37,6 @@ Además, solo el usuario identificado tendrá acceso a sus propios favoritos, en
 * Eliminar canción de mis favoritos.
 * Obtener su lista de favoritos.
 
-
-  
-  
-
-
-
 Built With (construido con)
 Las tecnologías que se han utilizado para crear toda la capa del servidor:
 * Spring Boot (3.1.4)

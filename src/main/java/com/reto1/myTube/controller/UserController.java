@@ -84,10 +84,10 @@ public class UserController {
 	@PutMapping("/users/{email},{oldPassword},{password}")
 	public ResponseEntity<?> updateUser(@PathVariable("email") String email, @PathVariable("oldPassword") String oldPassword, @PathVariable("password") String password) throws UserNotFoundConstraintException, UserNumberViewsNotFoundException, PasswordNotMatchesException {
 		
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodePassword = passwordEncoder.encode(password);
-		
 		try {
+			
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String encodePassword = passwordEncoder.encode(password);
 			
 			userService.update(email, oldPassword, encodePassword);
 			return new ResponseEntity<>(HttpStatus.OK);
@@ -114,7 +114,7 @@ public class UserController {
 	@GetMapping("/auth/me")
 	public ResponseEntity<?> getUserInfo(Authentication authentication) throws UserNumberViewsNotFoundException {
 		UserDAO userDetails = (UserDAO) authentication.getPrincipal();
-		UserDTO user=getUserByEmail(userDetails.getEmail());
+		UserDTO user = getUserByEmail(userDetails.getEmail());
 		return ResponseEntity.ok().body(user);
 	}
 
