@@ -68,7 +68,7 @@ public class UserController {
 	}
 
 	@PostMapping("/auth/signup")
-	public ResponseEntity<?> signIn(@RequestBody @Valid UserPostRequest request) throws UserNotFoundConstraintException {
+	public ResponseEntity<?> signUp(@RequestBody @Valid UserPostRequest request) throws UserNotFoundConstraintException {
 		// TODO solo esta creado en el caso de que funcione. Si no es posible que de 500 o 401.
 		// aqui hacer lo que sea preciso
 		// vamos a cifrar la contrasenia aqui, ya que no queremos andar dando vueltas con la contraseña sin encriptar si no es preciso

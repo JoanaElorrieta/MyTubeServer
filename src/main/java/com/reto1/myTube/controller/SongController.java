@@ -31,7 +31,7 @@ public class SongController {
 	SongService songService;
 
 	@GetMapping("/songs")
-	public ResponseEntity<List<SongGetRequest>> getSong() throws SongNotFoundException {
+	public ResponseEntity<List<SongGetRequest>> getAllSongs() throws SongNotFoundException {
 		return new ResponseEntity<>(songDtoListToSongGetRequestList(songService.findAll()), HttpStatus.OK);
 	}
 
