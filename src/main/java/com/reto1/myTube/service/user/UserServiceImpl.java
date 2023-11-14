@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.reto1.myTube.exception.user.FavoriteUserSongConstraintException;
 import com.reto1.myTube.exception.user.FavoriteUserSongNotFoundException;
+import com.reto1.myTube.exception.user.PasswordNotMatchesException;
 import com.reto1.myTube.exception.user.UserNotFoundConstraintException;
 import com.reto1.myTube.exception.user.UserNumberViewsNotFoundException;
 import com.reto1.myTube.model.user.UserDAO;
@@ -43,14 +44,14 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 	}
 
 	@Override
-	public int update(String email, String password) throws UserNotFoundConstraintException, UserNumberViewsNotFoundException {
+	public int update(String email, String oldPassword, String encodePassword) throws UserNotFoundConstraintException, UserNumberViewsNotFoundException, PasswordNotMatchesException {
 		UserDetails userDetails = loadUserByUsername(email);
-
-		if (passwordEncoder.matches(password, userDetails.getPassword())) {
-			return userRepository.update(email, password);
-		}
 		
-		return 0;
+		if (passwordEncoder.matches(oldPassword, userDetails.getPassword())) {
+			return userRepository.update(email, encodePassword);
+		}else {
+			throw new PasswordNotMatchesException("The password is not correct");
+		}
 		
 	}
 

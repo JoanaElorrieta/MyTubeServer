@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.reto1.myTube.exception.user.FavoriteUserSongConstraintException;
 import com.reto1.myTube.exception.user.FavoriteUserSongNotFoundException;
+import com.reto1.myTube.exception.user.PasswordNotMatchesException;
 import com.reto1.myTube.exception.user.UserNotFoundConstraintException;
 import com.reto1.myTube.exception.user.UserNumberViewsNotFoundException;
 import com.reto1.myTube.model.user.AuthRequest;
@@ -80,10 +81,21 @@ public class UserController {
 		return new ResponseEntity<Integer>(userService.create(user), HttpStatus.CREATED);
 	}
 
-	@PutMapping("/users/{email},{password}")
-	public ResponseEntity<?> updateUser(@PathVariable("email") String email, @PathVariable("password") String password) throws UserNotFoundConstraintException, UserNumberViewsNotFoundException {
-		userService.update(email,password);
-		return new ResponseEntity<>(HttpStatus.OK);
+	@PutMapping("/users/{email},{oldPassword},{password}")
+	public ResponseEntity<?> updateUser(@PathVariable("email") String email, @PathVariable("oldPassword") String oldPassword, @PathVariable("password") String password) throws UserNotFoundConstraintException, UserNumberViewsNotFoundException, PasswordNotMatchesException {
+		
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodePassword = passwordEncoder.encode(password);
+		
+		try {
+			
+			userService.update(email, oldPassword, encodePassword);
+			return new ResponseEntity<>(HttpStatus.OK);
+			
+		}catch (PasswordNotMatchesException e) {
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
+		}
+		
 	}
 	
 	@PostMapping("/users/{idUser},{idSong}/favorite")

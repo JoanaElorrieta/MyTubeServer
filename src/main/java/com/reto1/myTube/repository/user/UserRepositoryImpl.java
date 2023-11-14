@@ -47,11 +47,11 @@ public class UserRepositoryImpl implements UserRepository{
 	}
 
 	@Override
-	public int update(String email, String password) throws UserNotFoundConstraintException {
+	public int update(String email, String encodePassword) throws UserNotFoundConstraintException {
 		try {
 			return jdbcTemplate.update(
 					"UPDATE user SET password = ? WHERE email = ?",
-					new Object[] { password, email }
+					new Object[] { encodePassword , email }
 					);
 		}catch (DataIntegrityViolationException e) {
 			throw new UserNotFoundConstraintException("Integrity fail when try to update a user");

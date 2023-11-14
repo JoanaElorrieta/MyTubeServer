@@ -62,7 +62,7 @@ public class WebSecurityConfig {
 				// employees
 				// permitimos el get a cualquiera
 				//.requestMatchers("/api/employees/{id}").permitAll()
-				.requestMatchers(HttpMethod.GET, "/songs").permitAll()
+				.requestMatchers(HttpMethod.GET, "/songs", "/songs/{id}").permitAll()
 				
 				.requestMatchers(HttpMethod.PUT, "/users/{email},{password}").permitAll()
 				
