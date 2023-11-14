@@ -12,7 +12,7 @@ public interface UserService {
 
 	UserDTO loadUser(String email) throws UserNumberViewsNotFoundException;
 	int create(UserDTO userDto) throws UserNotFoundConstraintException;
-	int update(String email, String password) throws UserNotFoundConstraintException;
+	int update(String email, String password) throws UserNotFoundConstraintException, UserNumberViewsNotFoundException;
 	int createFavSong(int idUser, int idSong) throws FavoriteUserSongConstraintException;
 	int deleteFavSong(int idUser, int idSong) throws FavoriteUserSongNotFoundException;
 	List<Integer> getNumberViews(int idUser) throws UserNumberViewsNotFoundException;

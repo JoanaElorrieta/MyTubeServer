@@ -81,7 +81,7 @@ public class UserController {
 	}
 
 	@PutMapping("/users/{email},{password}")
-	public ResponseEntity<?> updateUser(@PathVariable("email") String email, @PathVariable("password") String password) throws UserNotFoundConstraintException {
+	public ResponseEntity<?> updateUser(@PathVariable("email") String email, @PathVariable("password") String password) throws UserNotFoundConstraintException, UserNumberViewsNotFoundException {
 		userService.update(email,password);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

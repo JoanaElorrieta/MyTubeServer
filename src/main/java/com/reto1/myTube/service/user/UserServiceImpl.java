@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.reto1.myTube.exception.user.FavoriteUserSongConstraintException;
@@ -25,6 +26,9 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 
 	@Autowired
 	SongService songService;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	@Override
 	public UserDTO loadUser(String email) throws UserNumberViewsNotFoundException {
@@ -39,8 +43,15 @@ public class UserServiceImpl implements UserService, UserDetailsService{
 	}
 
 	@Override
-	public int update(String email, String password) throws UserNotFoundConstraintException {
-		return userRepository.update(email, password);
+	public int update(String email, String password) throws UserNotFoundConstraintException, UserNumberViewsNotFoundException {
+		UserDetails userDetails = loadUserByUsername(email);
+
+		if (passwordEncoder.matches(password, userDetails.getPassword())) {
+			return userRepository.update(email, password);
+		}
+		
+		return 0;
+		
 	}
 
 

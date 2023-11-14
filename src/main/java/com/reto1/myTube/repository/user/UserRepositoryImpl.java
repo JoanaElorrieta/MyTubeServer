@@ -49,7 +49,6 @@ public class UserRepositoryImpl implements UserRepository{
 	@Override
 	public int update(String email, String password) throws UserNotFoundConstraintException {
 		try {
-
 			return jdbcTemplate.update(
 					"UPDATE user SET password = ? WHERE email = ?",
 					new Object[] { password, email }
