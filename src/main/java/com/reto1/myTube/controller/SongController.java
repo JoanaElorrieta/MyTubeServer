@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import com.reto1.myTube.model.song.SongDTO;
 import com.reto1.myTube.model.song.SongFavsViewsRequest;
 import com.reto1.myTube.model.song.SongGetRequest;
 import com.reto1.myTube.model.song.SongPostRequest;
+import com.reto1.myTube.model.user.UserDAO;
 import com.reto1.myTube.service.song.SongService;
 
 @RestController
@@ -40,9 +42,10 @@ public class SongController {
 		SongGetRequest songGetRequest = songDTOToSongGetRequest(songService.findById(id));
 		return new ResponseEntity<>(songGetRequest, HttpStatus.OK);
 	}
-	@GetMapping("/songs/user/{id}")
-	public ResponseEntity<List<SongFavsViewsRequest>> getSongsFavoriteViews(@PathVariable("id") int id) throws SongNotFoundException, UserNumberViewsNotFoundException {
-		List<SongFavsViewsRequest> songFavsViewsRequest = songDTOListToSongFavsViewsRequestList(songService.findFavsSongsForUser(id));
+	@GetMapping("/songs/user")
+	public ResponseEntity<List<SongFavsViewsRequest>> getSongsFavoriteViews(Authentication authentication) throws SongNotFoundException, UserNumberViewsNotFoundException {
+		UserDAO userDetails = (UserDAO) authentication.getPrincipal();
+		List<SongFavsViewsRequest> songFavsViewsRequest = songDTOListToSongFavsViewsRequestList(songService.findFavsSongsForUser(userDetails.getId()));
 		return new ResponseEntity<>(songFavsViewsRequest, HttpStatus.OK);
 	}
 
@@ -64,14 +67,16 @@ public class SongController {
 		songService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	@PutMapping("/songs/{idUser},{idSong}/play")
-	public ResponseEntity<?> updateNumberViews(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) throws UserNumberViewsConstraintException {
-		songService.updateNumberViews(idUser, idSong);
+	@PutMapping("/songs/{idSong}/play")
+	public ResponseEntity<?> updateNumberViews(Authentication authentication, @PathVariable("idSong") int idSong) throws UserNumberViewsConstraintException {
+		UserDAO userDetails = (UserDAO) authentication.getPrincipal();
+		songService.updateNumberViews(userDetails.getId(), idSong);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	@PostMapping("/songs/{idUser},{idSong}/play")
-	public ResponseEntity<?> insertNumberViews(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) throws UserNumberViewsConstraintException {
-		songService.insertNumberViews(idUser, idSong);
+	@PostMapping("/songs/{idSong}/play")
+	public ResponseEntity<?> insertNumberViews(Authentication authentication, @PathVariable("idSong") int idSong) throws UserNumberViewsConstraintException {
+		UserDAO userDetails = (UserDAO) authentication.getPrincipal();
+		songService.insertNumberViews(userDetails.getId(), idSong);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 

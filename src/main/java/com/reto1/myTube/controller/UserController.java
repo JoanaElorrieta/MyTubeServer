@@ -23,6 +23,7 @@ import com.reto1.myTube.exception.user.UserNotFoundConstraintException;
 import com.reto1.myTube.exception.user.UserNumberViewsNotFoundException;
 import com.reto1.myTube.model.user.AuthRequest;
 import com.reto1.myTube.model.user.AuthResponse;
+import com.reto1.myTube.model.user.ChangePasswordRequest;
 import com.reto1.myTube.model.user.UserDAO;
 import com.reto1.myTube.model.user.UserDTO;
 import com.reto1.myTube.model.user.UserPostRequest;
@@ -81,15 +82,13 @@ public class UserController {
 		return new ResponseEntity<Integer>(userService.create(user), HttpStatus.CREATED);
 	}
 
-	@PutMapping("/users/{email},{oldPassword},{password}")
-	public ResponseEntity<?> updateUser(@PathVariable("email") String email, @PathVariable("oldPassword") String oldPassword, @PathVariable("password") String password) throws UserNotFoundConstraintException, UserNumberViewsNotFoundException, PasswordNotMatchesException {
-		
+	@PutMapping("/users/update")
+	public ResponseEntity<?> updateUser(@RequestBody ChangePasswordRequest changePasswordRequest) throws UserNotFoundConstraintException, UserNumberViewsNotFoundException, PasswordNotMatchesException {
 		try {
-			
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-			String encodePassword = passwordEncoder.encode(password);
+			String encodePassword = passwordEncoder.encode(changePasswordRequest.getPassword());
 			
-			userService.update(email, oldPassword, encodePassword);
+			userService.update(changePasswordRequest.getEmail(), changePasswordRequest.getOldPassword(), encodePassword);
 			return new ResponseEntity<>(HttpStatus.OK);
 			
 		}catch (PasswordNotMatchesException e) {
@@ -98,15 +97,17 @@ public class UserController {
 		
 	}
 	
-	@PostMapping("/users/{idUser},{idSong}/favorite")
-	public ResponseEntity<?> createFavSongForUser(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) throws FavoriteUserSongConstraintException {
-		userService.createFavSong(idUser, idSong);
+	@PostMapping("/users/{idSong}/favorite")
+	public ResponseEntity<?> createFavSongForUser(Authentication authentication, @PathVariable("idSong") int idSong) throws FavoriteUserSongConstraintException {
+		UserDAO userDetails = (UserDAO) authentication.getPrincipal();
+		userService.createFavSong(userDetails.getId(), idSong);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/users/{idUser},{idSong}/favorite")
-	public ResponseEntity<?> deleteFavSongForUser(@PathVariable("idUser") int idUser, @PathVariable("idSong") int idSong) throws FavoriteUserSongNotFoundException {
-		userService.deleteFavSong(idUser, idSong);
+	@DeleteMapping("/users/{idSong}/favorite")
+	public ResponseEntity<?> deleteFavSongForUser(Authentication authentication, @PathVariable("idSong") int idSong) throws FavoriteUserSongNotFoundException {
+		UserDAO userDetails = (UserDAO) authentication.getPrincipal();
+		userService.deleteFavSong(userDetails.getId(), idSong);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	

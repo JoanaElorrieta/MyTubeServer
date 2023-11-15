@@ -61,7 +61,7 @@ public class WebSecurityConfig {
 				
 				.requestMatchers(HttpMethod.GET, "/songs", "/songs/{id}").permitAll()
 				
-				.requestMatchers(HttpMethod.PUT, "/users/{email},{oldPassword},{password}").permitAll()
+				.requestMatchers(HttpMethod.PUT, "/users/update").permitAll()
 				
 				.requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 				

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "fd43aa4f-8720-4cb0-a196-e6193712d731",
+		"_postman_id": "74622ddc-62d3-4688-837e-4636b38bbc5d",
 		"name": "RetoMyTube",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "30744038"
+		"_exporter_id": "29686330"
 	},
 	"item": [
 		{
@@ -59,20 +59,19 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmExMEBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNzAwMDY1Mjk3LCJleHAiOjE3MDAxNTE2OTcsInVzZXJJZCI6Nn0.tjrohA1svsYrHBDaR5316V_nK5oZ2wQ4whrYsrD3hJYsRZ1JEm3JTgxpqR7jky24OG2rXbV5y-CUoawy4gK2yw",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/songs/user/1",
+							"raw": "localhost:8080/songs/user",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"songs",
-								"user",
-								"1"
+								"user"
 							]
 						}
 					},
@@ -85,13 +84,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmExMEBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNzAwMDY1Mjk3LCJleHAiOjE3MDAxNTE2OTcsInVzZXJJZCI6Nn0.tjrohA1svsYrHBDaR5316V_nK5oZ2wQ4whrYsrD3hJYsRZ1JEm3JTgxpqR7jky24OG2rXbV5y-CUoawy4gK2yw",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\r\n    \"title\": \"Prueba1\",\r\n    \"author\": \"Prueba1\",\r\n    \"url\": \"https://123.com\"\r\n\r\n}",
+							"raw": "{\r\n\r\n    \"title\": \"dAVID\",\r\n    \"author\": \"David\",\r\n    \"url\": \"https://1234.com\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -118,19 +117,45 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmExMEBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNzAwMDY1Mjk3LCJleHAiOjE3MDAxNTE2OTcsInVzZXJJZCI6Nn0.tjrohA1svsYrHBDaR5316V_nK5oZ2wQ4whrYsrD3hJYsRZ1JEm3JTgxpqR7jky24OG2rXbV5y-CUoawy4gK2yw",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "localhost:8080/songs/4,1/play",
+							"raw": "localhost:8080/songs/1/play",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"songs",
-								"4,1",
+								"1",
+								"play"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateNumberViews",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmExMEBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNzAwMDY1Mjk3LCJleHAiOjE3MDAxNTE2OTcsInVzZXJJZCI6Nn0.tjrohA1svsYrHBDaR5316V_nK5oZ2wQ4whrYsrD3hJYsRZ1JEm3JTgxpqR7jky24OG2rXbV5y-CUoawy4gK2yw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/songs/1/play",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"songs",
+								"1",
 								"play"
 							]
 						}
@@ -144,44 +169,10 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmExMEBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNzAwMDY1Mjk3LCJleHAiOjE3MDAxNTE2OTcsInVzZXJJZCI6Nn0.tjrohA1svsYrHBDaR5316V_nK5oZ2wQ4whrYsrD3hJYsRZ1JEm3JTgxpqR7jky24OG2rXbV5y-CUoawy4gK2yw",
 								"type": "text"
 							}
 						],
-						"url": {
-							"raw": "localhost:8080/songs/6",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"songs",
-								"6"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "updateSong",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\r\n    \"title\": \"Prueba2\",\r\n    \"author\": \"Prueba2\",\r\n    \"url\": \"https://123.com\"\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "localhost:8080/songs/4",
 							"host": [
@@ -197,26 +188,34 @@
 					"response": []
 				},
 				{
-					"name": "updateNumberViews",
+					"name": "updateSong",
 					"request": {
 						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1MjUxLCJleHAiOjE2OTk5OTE2NTEsInVzZXJJZCI6OX0.cDU77ohcK_TvjiW9ogZKlcL1UZ-VrWH_OSbkO01nxT5irhsqDI5Po8bQGNncQuDdLj3bRo97msALP0T9vPKmXA",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmExMEBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNzAwMDY1Mjk3LCJleHAiOjE3MDAxNTE2OTcsInVzZXJJZCI6Nn0.tjrohA1svsYrHBDaR5316V_nK5oZ2wQ4whrYsrD3hJYsRZ1JEm3JTgxpqR7jky24OG2rXbV5y-CUoawy4gK2yw",
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"title\": \"Prueba2\",\r\n    \"author\": \"Prueba2\",\r\n    \"url\": \"https://123.com\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "localhost:8080/songs/1,1/play",
+							"raw": "localhost:8080/songs/7",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"songs",
-								"1,1",
-								"play"
+								"7"
 							]
 						}
 					},
@@ -234,13 +233,14 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1ODg2LCJleHAiOjE2OTk5OTIyODYsInVzZXJJZCI6OX0.lGao2hXzUihL-9rYgQJbl782zWPMcTBP-4T5WuRP--L6vPhfJiMTGemDuyPJo97I2Z2sygIS_fE7X5LV-G4WBA",
-								"type": "text"
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmExMEBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNzAwMDY3MjcwLCJleHAiOjE3MDAxNTM2NzAsInVzZXJJZCI6Nn0.wI01nAc_ouFVvrDRuFCfvodBqZASvd2N4gv6CGaOAXMrvnHLUAuAx8CQjf5t7gctd7n_m350O1iVmJbob_vQIQ",
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\r\n    \"name\": \"Prueba2\",\r\n    \"lastName\": \"Prueba2\",\r\n    \"email\": \"Prueba2\",\r\n    \"password\": \"Prueba2\"\r\n\r\n}",
+							"raw": "{\r\n\r\n    \"email\": \"prueba10@gmail.com\",\r\n    \"oldPassword\": \"12345678\",\r\n    \"password\": \"12341234\"\r\n    \r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -248,33 +248,34 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/users/amanciortega@gmail.com,12341234",
+							"raw": "localhost:8080/users/update",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"users",
-								"amanciortega@gmail.com,12341234"
+								"update"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "createFavSongForUser",
+					"name": "login",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1ODg2LCJleHAiOjE2OTk5OTIyODYsInVzZXJJZCI6OX0.lGao2hXzUihL-9rYgQJbl782zWPMcTBP-4T5WuRP--L6vPhfJiMTGemDuyPJo97I2Z2sygIS_fE7X5LV-G4WBA",
-								"type": "text"
+								"value": "Bearer askfhsuifhw38y948twe98chw89r39583thguifcbil8vryiyrtv4tyw37ry3",
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n\r\n    \"email\": \"prueba10@gmail.com\",\r\n    \"password\": \"12345678\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -282,41 +283,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/users/1,3/favorite",
+							"raw": "localhost:8080/auth/login",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"users",
-								"1,3",
-								"favorite"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "deleteFavSongForUser",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA1ODg2LCJleHAiOjE2OTk5OTIyODYsInVzZXJJZCI6OX0.lGao2hXzUihL-9rYgQJbl782zWPMcTBP-4T5WuRP--L6vPhfJiMTGemDuyPJo97I2Z2sygIS_fE7X5LV-G4WBA",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "localhost:8080/users/1,3/favorite",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"1,3",
-								"favorite"
+								"auth",
+								"login"
 							]
 						}
 					},
@@ -329,7 +303,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\r\n    \"name\": \"Prueba66\",\r\n    \"lastName\": \"Prueba66\",\r\n    \"email\": \"prueba66@gmail.com\",\r\n    \"password\": \"prueba6\"\r\n\r\n}",
+							"raw": "{\r\n\r\n    \"name\": \"Prueba14\",\r\n    \"lastName\": \"Prueba14\",\r\n    \"email\": \"prueba14@gmail.com\",\r\n    \"password\": \"prueba14\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -357,7 +331,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmE5OUBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNjk5OTA2NDI0LCJleHAiOjE2OTk5OTI4MjQsInVzZXJJZCI6OX0.8POS_S5YCvAiOiNek-imYGvJ4X5fRip4ImZcJ_wrBwwUdSh1SG4O5jH7v_A0jJnlela9Bp_KlX4Kft5-GdZnaA",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmExMEBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNzAwMDY1Mjk3LCJleHAiOjE3MDAxNTE2OTcsInVzZXJJZCI6Nn0.tjrohA1svsYrHBDaR5316V_nK5oZ2wQ4whrYsrD3hJYsRZ1JEm3JTgxpqR7jky24OG2rXbV5y-CUoawy4gK2yw",
 								"type": "text"
 							}
 						],
@@ -376,34 +350,52 @@
 					"response": []
 				},
 				{
-					"name": "login",
+					"name": "createFavSongForUser",
 					"request": {
 						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer askfhsuifhw38y948twe98chw89r39583thguifcbil8vryiyrtv4tyw37ry3",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmExMEBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNzAwMDY1Mjk3LCJleHAiOjE3MDAxNTE2OTcsInVzZXJJZCI6Nn0.tjrohA1svsYrHBDaR5316V_nK5oZ2wQ4whrYsrD3hJYsRZ1JEm3JTgxpqR7jky24OG2rXbV5y-CUoawy4gK2yw",
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\r\n    \"email\": \"prueba99@gmail.com\",\r\n    \"password\": \"prueba99\"\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "localhost:8080/auth/login",
+							"raw": "localhost:8080/users/2/favorite",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"auth",
-								"login"
+								"users",
+								"2",
+								"favorite"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFavSongForUser",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmExMEBnbWFpbC5jb20iLCJpc3MiOiJBRFRfREFNIiwiaWF0IjoxNzAwMDY1Mjk3LCJleHAiOjE3MDAxNTE2OTcsInVzZXJJZCI6Nn0.tjrohA1svsYrHBDaR5316V_nK5oZ2wQ4whrYsrD3hJYsRZ1JEm3JTgxpqR7jky24OG2rXbV5y-CUoawy4gK2yw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/users/3/favorite",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"3",
+								"favorite"
 							]
 						}
 					},
