@@ -69,7 +69,7 @@ public class UserRepositoryImpl implements UserRepository{
 			throw new FavoriteUserSongConstraintException("Integrity fail when try to create a favorite song");
 		}
 	}
-	
+
 	@Override
 	public int deleteFavSong(int idUser, int idSong) throws FavoriteUserSongNotFoundException {	
 		int rowsAffected = jdbcTemplate.update(
@@ -79,21 +79,21 @@ public class UserRepositoryImpl implements UserRepository{
 		if (rowsAffected != 0) {
 			return rowsAffected;
 		}else {
-		throw new FavoriteUserSongNotFoundException("Integrity fail when try to delete a favorite song");
+			throw new FavoriteUserSongNotFoundException("Integrity fail when try to delete a favorite song");
 		}
 	}
 
 	public List<Integer> getNumberViews(int idUser) throws UserNumberViewsNotFoundException {
-	    try {
-	        List<Integer> result = jdbcTemplate.queryForList(
-	            "SELECT views FROM play WHERE id_user = ?",
-	            Integer.class,
-	            idUser
-	        );
-	        return result;
-	    } catch (EmptyResultDataAccessException e) {
-	    	throw new UserNumberViewsNotFoundException("Integrity fail when try to get the views from user");
-	    }
+		try {
+			List<Integer> result = jdbcTemplate.queryForList(
+					"SELECT views FROM play WHERE id_user = ?",
+					Integer.class,
+					idUser
+					);
+			return result;
+		} catch (EmptyResultDataAccessException e) {
+			throw new UserNumberViewsNotFoundException("Integrity fail when try to get the views from user");
+		}
 	}
 
 	@Override
