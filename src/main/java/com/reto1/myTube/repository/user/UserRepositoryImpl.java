@@ -75,7 +75,7 @@ public class UserRepositoryImpl implements UserRepository{
 		int rowsAffected = jdbcTemplate.update(
 				"DELETE FROM favorite WHERE id_user = ? AND id_song = ?",
 				new Object[] { idUser, idSong }
-				);
+		);
 		if (rowsAffected != 0) {
 			return rowsAffected;
 		}else {
@@ -89,7 +89,7 @@ public class UserRepositoryImpl implements UserRepository{
 					"SELECT views FROM play WHERE id_user = ?",
 					Integer.class,
 					idUser
-					);
+			);
 			return result;
 		} catch (EmptyResultDataAccessException e) {
 			throw new UserNumberViewsNotFoundException("Integrity fail when try to get the views from user");
