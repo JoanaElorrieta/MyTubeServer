@@ -14,8 +14,14 @@ Los repositorios de los proyectos son los siguientes:
 * App: https://github.com/JoanaElorrieta/MyTubeApp 
 
 
+
 Descripción del proyecto.
+
+
 ![DiagramaE_R drawio](https://github.com/JoanaElorrieta/MyTubeServer/assets/124193410/f1313dd0-79a7-4317-b06e-12616155afb9)
+
+
+
 En este proyecto, se desarrolla una App llamada MyTube. En ella, los usuarios podrán acceder a los vídeos musicales de nuestra app, hacer login y registrarse. 
 Si el usuario decide registrarse o hacer login, tendrá acceso a otras gestiones en la app, tales como añadir nuevas canciones o modificar y eliminar canciones existentes.
 Por otra parte, cada usuario podrá gestionar su lista de favoritos, pudiendo añadir, modificar y eliminar canciones incluidas en esta.
